@@ -74,7 +74,7 @@ let incrementPort = (port) => new Promise((resolve, reject) => {
 })
 
 module.exports = {
-  // get: get,
+  get: get,
   // save: get,
   incrementPort: incrementPort
 }

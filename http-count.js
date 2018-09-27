@@ -3,8 +3,11 @@ const argv = require('minimist')(process.argv.slice(2))
 const database = require('./save-count')
 
 
+
 const app = express()
 const port = argv.p
+
+
 
 // parse args
 if (port === undefined) {
@@ -12,7 +15,34 @@ if (port === undefined) {
   process.exit(1)
 }
 
+// setup express
+app.use(express.static('public'));
+app.set('view engine', 'pug');
+
+
+
+
 let current = 0
+
+app.get('/', (req, res) => {
+
+  let counts = database.get()
+    .then((counts) => {
+      console.log(counts)
+      res.render('index', {
+        title: 'Evaluation',
+        current: current,
+        total: counts[port]
+      });
+    }).catch(() => {
+      res.statusCode = 500;
+      res.json({
+        error: error,
+      })
+    })
+
+
+})
 
 app.get('/count', (req, res) => {
   current++
