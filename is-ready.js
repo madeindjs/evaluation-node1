@@ -1,13 +1,13 @@
 const fs = require('fs')
 const chalk = require('chalk')
-const path = require('path')
 
-const nodeModulePath = path.resolve(__dirname, 'node_modules')
-
-
-
-module.exports.run = () => new Promise((resolve, reject) => {
-  fs.stat(nodeModulePath, (error, fstat) => {
+/**
+ * Check if given path exists or not
+ * @param  {String} pathname
+ * @return {Promise}
+ */
+module.exports.run = (pathname) => new Promise((resolve, reject) => {
+  fs.stat(pathname, (error, fstat) => {
     if (error) {
       if (error.code === 'ENOENT') {
         // file not exists
