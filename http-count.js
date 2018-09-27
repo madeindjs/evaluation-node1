@@ -17,34 +17,18 @@ let current = 0
 app.get('/count', (req, res) => {
   current++
 
-  let total = 0
-  // fetch value
-  database.get()
-    // get value
-    .then((totalCount) => {
-      total = totalCount + 1
-      // write value
-      database.save(total)
-    })
-    .catch((error) => {
-      if (error.code == 'ENOENT') {
-        // create file if not exists
-        database.save(total)
-      } else {
-        throw "Could not init file"
-      }
-    })
-    // render json
-    .then(() => {
+  database.incrementPort(port)
+    .then((counts) => {
       res.json({
         current: current,
-        total: total
+        total: counts[port]
       })
     })
-    // shit happens ...
     .catch((error) => {
-      console.error('Could not read or write database' + error)
-      process.exit(1)
+      res.statusCode = 500;
+      res.json({
+        error: error,
+      })
     })
 })
 
