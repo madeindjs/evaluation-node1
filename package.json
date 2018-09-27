@@ -7,5 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Alexandre Rousseau <contact@rousseau-alexandre.fr>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.24.7",
+    "nodemon": "^1.18.4"
+  }
 }
