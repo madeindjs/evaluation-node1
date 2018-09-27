@@ -12,4 +12,15 @@ html
       tr
         th= "All time"
         td= total
+        
+    form(method="POST" action="/reset")
+      input(type="checkbox" name="current" value="1")
+      label= "Current"
+      br
+      input(type="checkbox" name="all_time" value="1")
+      label= "All Time"
+      br
+        
+      input(type= "submit" value="reset")
+      
     
