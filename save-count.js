@@ -60,15 +60,14 @@ let incrementPort = (port) => new Promise((resolve, reject) => {
       let countPort = counts[port]
 
       if (countPort === undefined) {
-        counts[port] = 1
-      } else {
-        counts[port] = countPort + 1
+        countPort = 0
       }
 
+      counts[port] = countPort + 1
+
       return save(counts)
-    }).then((counts) => {
-      return resolve(counts)
     })
+    .then((counts) => resolve(counts))
     .catch((error) => reject(error))
 
 })
