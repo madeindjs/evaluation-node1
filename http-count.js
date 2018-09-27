@@ -42,6 +42,23 @@ app.get('/', (req, res) => {
     })
 })
 
+app.get('/api', (req, res) => {
+
+  database.get()
+    .then((counts) => {
+      res.json({
+        current: current,
+        total: counts[port]
+      })
+    })
+    .catch((error) => {
+      res.statusCode = 500;
+      res.json({
+        error: error,
+      })
+    })
+})
+
 app.post('/reset', (req, res) => {
 
   if (req.body.current !== undefined) {
